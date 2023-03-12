@@ -97,6 +97,7 @@ begin
 					imprimirEmp(emp);
 				end;
 		end;
+	close(E);
 end;
 
 procedure imprimirDeterminado(var E:archivo; nombre:string; apellido:string);
