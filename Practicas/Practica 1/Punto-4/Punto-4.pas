@@ -25,6 +25,7 @@ end;
 Type archivo = file of empleado;
 var empleados:archivo;
 
+//CARGA DE DATOS DE EMPLEADO
 procedure leerEmpleado (var E:empleado);
 begin
 	write('numero de empleado:');
@@ -39,6 +40,7 @@ begin
 	readln(E.edad);
 end;
 
+//CARGA DE ARCHIVO DE EMPLEADOS
 procedure cargar_archivo(var E:archivo);
 var
 	emp:empleado;
@@ -53,10 +55,7 @@ begin
 	close(E);
 end;
 
-{OPCIONES DE MENU
-
- PUNTO 3
-}
+//PARA SIMPLIFICAR CODIGO Y NO REPETIR
 procedure imprimirEmp(emp:empleado);
 begin
 	writeln('numero de empleado:');
@@ -71,6 +70,7 @@ begin
 	writeln(emp.edad);
 end;
 
+//IMPRIME TODA LA DATA DEL ARCHIVO OPCION A
 procedure imprimirALL (var E:archivo);
 var
 	emp:empleado;
@@ -84,6 +84,7 @@ begin
 	close(E);
 end;
 
+//IMPRIME LOS MAYORES DE 70 OPCION B
 procedure imprimirMayores (var E:archivo);
 var
 	emp:empleado;
@@ -100,6 +101,7 @@ begin
 	close(E);
 end;
 
+//IMPRIME EMPLEADO CON NOMBRE O APELLIDO DESEADO OPCION C
 procedure imprimirDeterminado(var E:archivo; nombre:string; apellido:string);
 var
 	emp:empleado;
@@ -116,11 +118,10 @@ begin
 	close(E);
 end;
 
-{PARTE 2
- 
- Punto 4
-}
 
+
+
+//BUSCA SI ESTA REPETIDO SE APLICA EN PROCESO cargarEmpleados
 function repetido(var E:archivo; empl:empleado):boolean;
 var
 	emp:empleado;
@@ -134,6 +135,7 @@ begin
 		end;
 end;
 
+//CARGA MAS EMPLEADOS SIN REPETIR OPCION D
 procedure cargarEmpleados(var E:archivo);
 var
 	emp:empleado;
@@ -149,6 +151,7 @@ begin
 	close(E);
 end;
 
+//MODIFICA EDAD DE EMPLEADO OPCION E
 procedure modificarEdad(var E:archivo;nro_empleado:integer);
 var 
 	emp:empleado;
@@ -170,7 +173,7 @@ begin
 	close(E);	
 end;
 
-// Exportar a TXT
+//EXPORTA ARCHIVO CON TODOS LOS EMPLEADOS OPCION F
 procedure exportarTxt(var E:archivo);
 var
 	txt: Text;
@@ -190,6 +193,7 @@ begin
 	close(txt);
 end;
 
+//EXPORTA TODOS LOS EMPLEADOS SIN DNI CARGADO OPCION G
 procedure exportar_Emp_sin_dni(var E:archivo);
 var
 	txt: Text;
@@ -212,6 +216,8 @@ begin
 	close(txt);
 end;
 
+
+//MENU
 procedure menu(var E:archivo);
 var
 	apellido,nombre:string;
@@ -260,7 +266,6 @@ begin
 			writeln('G-Exportar a un archivo de texto llamado: “faltaDNIEmpleado.txt”, los empleados que no tengan cargado el DNI (DNI en 00)');
 			writeln('H-Finalizar');
 		readln(opcion);
-
 	end;
 end;
 

@@ -34,6 +34,7 @@ end;
 Type archivo = file of empleado;
 var empleados:archivo;
 
+//CARGA DE DATOS DE EMPLEADO
 procedure leerEmpleado (var E:empleado);
 begin
 	write('numero de empleado:');
@@ -48,6 +49,7 @@ begin
 	readln(E.edad);
 end;
 
+//CARGA DE ARCHIVO DE EMPLEADOS
 procedure cargar_archivo(var E:archivo);
 var
 	emp:empleado;
@@ -62,6 +64,7 @@ begin
 	close(E);
 end;
 
+//PARA SIMPLIFICAR CODIGO Y NO REPETIR
 procedure imprimirEmp(emp:empleado);
 begin
 	writeln('numero de empleado:');
@@ -76,6 +79,7 @@ begin
 	writeln(emp.edad);
 end;
 
+//IMPRIME TODA LA DATA DEL ARCHIVO OPCION A
 procedure imprimirALL (var E:archivo);
 var
 	emp:empleado;
@@ -89,6 +93,7 @@ begin
 	close(E);
 end;
 
+//IMPRIME LOS MAYORES DE 70 OPCION B
 procedure imprimirMayores (var E:archivo);
 var
 	emp:empleado;
@@ -105,6 +110,7 @@ begin
 	close(E);
 end;
 
+//IMPRIME EMPLEADO CON NOMBRE O APELLIDO DESEADO OPCION C
 procedure imprimirDeterminado(var E:archivo; nombre:string; apellido:string);
 var
 	emp:empleado;
@@ -121,6 +127,7 @@ begin
 	close(E);
 end;
 
+//MENU
 procedure menu(var E:archivo);
 var
 	apellido,nombre:string;

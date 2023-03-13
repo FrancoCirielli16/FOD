@@ -1,0 +1,1 @@
+codigo del celular: 5 nombre: nose marca: nose descripcion: nose precio:  1.0E+001

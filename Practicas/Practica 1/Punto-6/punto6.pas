@@ -1,22 +1,21 @@
 {
-5. Realizar un programa para una tienda de celulares, que presente un menú con
-opciones para:
-a. Crear un archivo de registros no ordenados de celulares y cargarlo con datos
-ingresados desde un archivo de texto denominado “celulares.txt”. Los registros
-correspondientes a los celulares, deben contener: código de celular, el nombre,
-descripción, marca, precio, stock mínimo y el stock disponible.
-b. Listar en pantalla los datos de aquellos celulares que tengan un stock menor al
-stock mínimo.
-c. Listar en pantalla los celulares del archivo cuya descripción contenga una
-cadena de caracteres proporcionada por el usuario.
-d. Exportar el archivo creado en el inciso a) a un archivo de texto denominado
-“celulares.txt” con todos los celulares del mismo. El archivo de texto generado
-podría ser utilizado en un futuro como archivo de carga (ver inciso a), por lo que
-debería respetar el formato dado para este tipo de archivos en la NOTA 2.
+  
+6. Agregar al menú del programa del ejercicio 5, opciones para:
+
+a. Añadir uno o más celulares al final del archivo con sus datos ingresados por
+teclado.
+
+b. Modificar el stock de un celular dado.
+
+c. Exportar el contenido del archivo binario a un archivo de texto denominado:”SinStock.txt”, con aquellos celulares que tengan stock 0.
+
+NOTA: Las búsquedas deben realizarse por nombre de celular.
+   
 }
 
 
-program Punto5;
+
+program Punto6;
 
 Type celular = record
 	codigo_celular:integer;
@@ -139,6 +138,70 @@ begin
 	close(txt);
 end;
 
+//CARGA MAS CELULARES OPCION E
+procedure cargar_Mas_Celulares(var C:archivo);
+var
+	celu:celular;
+begin
+	leerCelular(celu);
+	reset(C);
+	while celu.nombre <> 'fin' do
+		begin
+			write(C,celu);
+			leerCelular(celu);
+		end;
+	close(C);
+end;
+
+
+//MODIFICA EL STOCK DEL CELULAR QUE DESEES OPCION F
+procedure modificarCelular(var C:archivo);
+var
+	celu:celular;
+	nombre:string;
+	stock:integer;
+begin
+	write('Ingresar el nombre del celular que queres modificar:');
+	readln(nombre);
+	reset(C);
+	while not eof(C) do
+		begin
+			read(C,celu);
+			if(celu.nombre = nombre)then
+			begin
+				write('Ingresa la cantidad de stock nuevo: ');
+				readln(stock);
+				celu.stock_disponible := celu.stock_disponible + stock;
+				seek(C,filepos(C)-1);
+				write(C,celu);
+			end;
+		end;
+	close(C);
+end;
+
+//EXPORTA LOS CELULARES CON STOCK 0
+procedure exportarCelus_Sin_Stock (var C:archivo);
+var
+	txt:Text;
+	celu:celular;
+begin
+	assign(txt,'SinStock.txt');
+	rewrite(txt);
+	reset(C);
+	while not eof(C)do
+		begin
+			read(C,celu);
+			if(celu.stock_disponible = 0)then
+				begin
+					with celu do 
+						writeln(txt,'codigo del celular: ',codigo_celular,'| nombre: ',nombre,'| marca: ',marca,'| descripcion: ',descripcion,'| precio: ',precio:1);
+				end;
+		end;
+	writeln('________Exportado crack_______');
+	close(C);
+	close(txt);
+end;
+
 //MENU
 procedure menu(var C:archivo);
 var
@@ -149,22 +212,31 @@ begin
 	writeln('B-Listar en pantalla los datos de aquellos celulares que tengan un stock menor al stock minimo');
 	writeln('C-Listar en pantalla los celulares del archivo cuya descripcion contenga una cadena de caracteres proporcionada por el usuario.');
 	writeln('D-Exportar el archivo creado');
-	writeln('E-Finalizar');
+	writeln('E-Añadir uno o más celulares al final del archivo con sus datos ingresados por teclado');
+	writeln('F-Modificar el stock de un celular dado');
+	writeln('G-Exportar el contenido del archivo binario a un archivo de texto denominado:”SinStock.txt”, con aquellos celulares que tengan stock 0');
+	writeln('H-Finalizar');
 	readln(opcion);
-	while opcion <> 'E' do
+	while opcion <> 'H' do
 	begin
 		case opcion of
 			'A':cargar_archivo(C);
 			'B':imprimirPorStocks(C);
 			'C':listaDescUsuario(C);
 			'D':exportarTxt(C);
+			'E':cargar_Mas_Celulares(C);
+			'F':modificarCelular(C);
+			'G':exportarCelus_Sin_Stock(C);
 		end;
 		writeln('|--------------------------------------MENU-------------------------------------------|');
 		writeln('A-Crear un archivo de celulares');
-		writeln('B-Listar en pantalla los datos de aquellos celulares que tengan un stock menor al stock mínimo');
-		writeln('C-Listar en pantalla los celulares del archivo cuya descripcion contenga una cadena de caracteres proporcionada por el usuario.');
+		writeln('B-Listar en pantalla los datos de aquellos celulares que tengan un stock menor al stock minimo');
+		writeln('C-Mostrar en pantalla celulares con descripcion deseada por usuario.');
 		writeln('D-Exportar el archivo creado');
-		writeln('E-Finalizar');
+		writeln('E-Añadir más celulares');
+		writeln('F-Modificar el stock de un celular dado');
+		writeln('G-Exportar el contenido del archivo denominado: SinStock.txt');
+		writeln('H-Finalizar');
 		readln(opcion);
 	end;
 end;
@@ -174,4 +246,3 @@ var
 BEGIN
 	menu(celulares);
 END.
-
