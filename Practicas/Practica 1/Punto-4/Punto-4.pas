@@ -145,6 +145,7 @@ begin
 	while (emp.apellido <> 'fin') do
 		begin
 			if(not repetido(E,emp))then
+				seek(E,fileSize(E));
 				write(E,emp);
 			leerEmpleado(emp);
 		end;

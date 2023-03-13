@@ -148,6 +148,7 @@ begin
 	while celu.nombre <> 'fin' do
 		begin
 			write(C,celu);
+			seek(C,filesize(C));
 			leerCelular(celu);
 		end;
 	close(C);
