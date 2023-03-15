@@ -5,6 +5,7 @@ a. Crear un archivo de registros no ordenados de celulares y cargarlo con datos
 ingresados desde un archivo de texto denominado “celulares.txt”. Los registros
 correspondientes a los celulares, deben contener: código de celular, el nombre,
 descripción, marca, precio, stock mínimo y el stock disponible.
+
 b. Listar en pantalla los datos de aquellos celulares que tengan un stock menor al
 stock mínimo.
 c. Listar en pantalla los celulares del archivo cuya descripción contenga una
@@ -21,7 +22,7 @@ program Punto5;
 Type celular = record
 	codigo_celular:integer;
 	nombre:string;
-	descripcion:string;
+	desc:string;
 	marca:string;
 	precio:real;
 	stock_minimo:integer;
@@ -39,7 +40,7 @@ procedure leerCelular(var c:celular);
 		write('nombre:');
 		readln(c.nombre);
 		write('descripcion:');
-		readln(c.descripcion);
+		readln(c.desc);
 		write('marca:');
 		readln(c.marca);
 		write('precio:');
@@ -55,18 +56,25 @@ procedure leerCelular(var c:celular);
 procedure cargar_archivo(var C:archivo);
 var
 	celu:celular;
+	txt:Textfile;
 	nombre:string;
 begin
 	writeln('Elija el nombre del archivo');
 	readln(nombre);
 	Assign(C,nombre);
-	leerCelular(celu);
+	Assign(txt,'celulares.txt');
 	rewrite(C);
-	while celu.nombre <> 'fin' do
+	reset(txt);
+	while (not eof(txt)) do
 		begin
-			write(C,celu);
-			leerCelular(celu);
+			readln(txt,celu.codigo_celular, celu.precio, celu.marca);
+			readln(txt,celu.stock_disponible, celu.stock_minimo, celu.desc);
+			readln(txt,celu.nombre);
+			write(C, celu);
 		end;
+	writeln('Archivo cargado');
+	close(txt);
+	close(C);
 end;
 
 //PROCESO PARA NO REPETIR CODIGO
@@ -74,7 +82,7 @@ procedure imprimirCelular(c:celular);
 begin
 	writeln('codigo del celular:',c.codigo_celular);
 	writeln('nombre:',c.nombre);
-	writeln('descripcion:',c.descripcion);
+	writeln('descripcion:',c.desc);
 	writeln('marca:',c.marca);
 	writeln('precio:',c.precio:2);
 	writeln('stock minimo:',c.stock_minimo);
@@ -110,7 +118,7 @@ begin
 	while not eof(C)do
 		begin
 			read(C,celu);
-			if(celu.descripcion = desc)then
+			if(celu.desc = desc)then
 				imprimirCelular(celu);
 		end;
 	close(C);
@@ -122,7 +130,7 @@ var
 	txt:Text;
 	celu:celular;
 begin
-	assign(txt,'celulares.txt');
+	assign(txt,'celularesExportados.txt');
 	rewrite(txt);
 	reset(C);
 	while not eof(C)do
@@ -130,7 +138,7 @@ begin
 			read(C,celu);
 			with celu do
 				begin
-					writeln(txt,' codigo del celular:  ',codigo_celular,'| nombre: ',nombre,'| descripcion: ',descripcion,'  |  ');
+					writeln(txt,' codigo del celular:  ',codigo_celular,'| nombre: ',nombre,'| descripcion: ',desc,'  |  ');
 					writeln(txt,' marca: ',marca,'| stock minimo:  ',stock_minimo,'| stock disponible:  ',stock_disponible,'|  precio: ',precio:1);
 				end;
 		end;

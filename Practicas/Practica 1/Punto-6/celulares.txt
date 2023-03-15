@@ -1,6 +1,9 @@
- codigo del celular:  1 nombre: s10 descripcion: 1  |  
- marca: s10 stock minimo:  10 stock disponible:  1000  precio:  1.0E+002
- codigo del celular:  2 nombre: f descripcion: f  |  
- marca: f stock minimo:  10 stock disponible:  5  precio:  1.0E+002
- codigo del celular:  5 nombre: nose descripcion: nose  |  
- marca: nose stock minimo:  1 stock disponible:  0  precio:  1.0E+001
+8787 5.6600000000000001E+001 samsung
+1000 100 es un lindo celu
+Zfold
+3213 2.6600000000000001E+001 samsung
+50 100 es un lindo celu
+s23
+3412 7.6600000000000001E+001 samsung
+200 300 es un lindo celu
+s10

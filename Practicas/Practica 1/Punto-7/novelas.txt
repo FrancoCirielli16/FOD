@@ -1,0 +1,6 @@
+1 100.0 terror
+cuentos de terror
+2 150.5 romance
+nose
+3 200.50 accion
+anashe
