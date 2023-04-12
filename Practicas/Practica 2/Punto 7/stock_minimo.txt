@@ -1,0 +1,6 @@
+Codigo: 1 Nombre: PAPAS
+Precio:  1.0000000000000000E+003 Stock: 48 Stock minimo: 100
+Codigo: 2 Nombre: PIJAS
+Precio:  1.0000000000000000E+003 Stock: 50 Stock minimo: 150
+Codigo: 3 Nombre: NOSE
+Precio:  1.0000000000000000E+003 Stock: 80 Stock minimo: 100
