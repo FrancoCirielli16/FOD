@@ -39,11 +39,11 @@ var
 	indice:reg_flor;
 begin
 	reset(a);
+	read(a,indice);
 	read(a,flor);
 	if(flor.codigo<0)then
 	begin
 		seek(a,abs(flor.codigo));
-		read(a,indice);
 		seek(a,FilePos(a)-1);
 		flor.codigo:=codigo;
 		flor.nombre:=nombre;
@@ -53,7 +53,10 @@ begin
 		writeln('SE AGREGO FLOR')
 	end
 	else
-		writeln('NO HAY ESPACIO LIBRE');
+		seek(a,filesize(a));
+		flor.codigo:=codigo;
+		flor.nombre:=nombre;
+		write(a,flor);
 	close(a);
 end;
 

@@ -39,7 +39,8 @@ begin
 		writeln('SE AGREGO FLOR')
 	end
 	else
-		writeln('NO HAY ESPACIO LIBRE');
+		seek(a,filesize(a));
+		write(a,flor);
 	close(a);
 end;
 
